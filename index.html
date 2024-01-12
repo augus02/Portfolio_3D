@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My ThreeJs Project</title>
+
+    <!-- Import the css file -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- You can change 0.160.0 to any other availble Three.js version to match your requirements -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- This canvas is the one you will use to display your Three.js code. -->
+    <canvas id="canvas"></canvas>
+    <div id="controls">
+        <ul>
+            <li>H: Open or close the external casing</li>
+            <li>S: Change the impeller's rotation speed</li>
+            <li>L: toggle lighting</li>
+        </ul>
+    </div>
+    <div id="casingMessage">The turbocompressor's external casing is composed of an inlet, a chamber, and an outlet</div>
+    <div id="impellerMessage">Inside the chamber, an impeller rotates to create high pressure at the outlet</div>
+
+    <!-- The import should happen after creating the other HTML elements since you will be importing them -->
+    <script type="module" src="./script.js"></script>
+</body>
+</html>

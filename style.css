@@ -1,0 +1,50 @@
+head, body {
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    display: block;
+}
+
+#casingMessage{
+    position: absolute;
+    top: 70%; /* Changer la valeur pour ajuster la position verticale */
+    left: 5%; /* Changer la valeur pour ajuster la position horizontale */
+    color: rgb(50, 36, 36);
+    font-family: Arial;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    z-index: 100;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#impellerMessage{
+    position: absolute;
+    top: 60%; /* Changer la valeur pour ajuster la position verticale */
+    left: 10%; /* Changer la valeur pour ajuster la position horizontale */
+    color: rgb(50, 36, 36);
+    font-family: Arial;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    z-index: 100;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#controls{
+    position: absolute;
+    top: 2%; /* Changer la valeur pour ajuster la position verticale */
+    right: 2%; /* Changer la valeur pour ajuster la position horizontale */
+    color: rgb(0, 0, 0);
+    font-family: Arial;
+    font-size: 1rem;
+    text-align: left;
+    z-index: 100;
+    visibility: visible;
+    background-color: white;
+    pointer-events: none;
+}
