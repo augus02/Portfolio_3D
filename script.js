@@ -51,10 +51,10 @@ const debugsphere = new THREE.SphereGeometry( 0.5, 32, 32 );
 const debugmaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
 const debugmesh = new THREE.Mesh( debugsphere, debugmaterial );
 debugmesh.position.set(0, 30, 0);
-scene.add( debugmesh );
+//scene.add( debugmesh );
 
 const light3Helper = new THREE.SpotLightHelper( light3 );
-scene.add( light3Helper );
+//scene.add( light3Helper );
 scene.add( light3 );
 
 const CubeGeom = new THREE.BoxGeometry( 5000, 2, 5000 );
@@ -77,7 +77,7 @@ let speed = 0.05;
 const loader = new OBJLoader();
 
 const axesHelper = new THREE.AxesHelper( 250 );
-scene.add( axesHelper );
+//scene.add( axesHelper );
 
 // loader.load(
 //   // resource URL
