@@ -47,13 +47,13 @@ scene.add( light );
 
 const light3 = new THREE.SpotLight( 0xffffff, 5, 0, Math.PI/6 , 0.25, 0.01);
 light3.position.set( 0, 500, 0 );
-const debugsphere = new THREE.SphereGeometry( 0.5, 32, 32 );
-const debugmaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-const debugmesh = new THREE.Mesh( debugsphere, debugmaterial );
-debugmesh.position.set(0, 30, 0);
+//const debugsphere = new THREE.SphereGeometry( 0.5, 32, 32 );
+//const debugmaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+//const debugmesh = new THREE.Mesh( debugsphere, debugmaterial );
+//debugmesh.position.set(0, 30, 0);
 //scene.add( debugmesh );
 
-const light3Helper = new THREE.SpotLightHelper( light3 );
+//const light3Helper = new THREE.SpotLightHelper( light3 );
 //scene.add( light3Helper );
 scene.add( light3 );
 
@@ -76,7 +76,7 @@ let speed = 0.05;
 
 const loader = new OBJLoader();
 
-const axesHelper = new THREE.AxesHelper( 250 );
+//const axesHelper = new THREE.AxesHelper( 250 );
 //scene.add( axesHelper );
 
 // loader.load(
