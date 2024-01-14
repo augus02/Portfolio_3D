@@ -22,6 +22,7 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true,
 })
 scene.background = new THREE.Color(0xffaaaa);
+scene.fog = new THREE.Fog(0Xffaaaa, 800, 900);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -41,20 +42,10 @@ composer.addPass(outputPass);
 
 const light = new THREE.AmbientLight( 0xffffff, 0.5, 0, 0.01 );
 light.position.set( 0, 200, 0 );
-//const lightHelper = new THREE.AmbientLightHelper( light );
-//scene.add( lightHelper );
 scene.add( light );
 
 const light3 = new THREE.SpotLight( 0xffffff, 5, 0, Math.PI/6 , 0.25, 0.01);
 light3.position.set( 0, 500, 0 );
-//const debugsphere = new THREE.SphereGeometry( 0.5, 32, 32 );
-//const debugmaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-//const debugmesh = new THREE.Mesh( debugsphere, debugmaterial );
-//debugmesh.position.set(0, 30, 0);
-//scene.add( debugmesh );
-
-//const light3Helper = new THREE.SpotLightHelper( light3 );
-//scene.add( light3Helper );
 scene.add( light3 );
 
 const CubeGeom = new THREE.BoxGeometry( 5000, 2, 5000 );
@@ -64,7 +55,6 @@ const cube = new THREE.Mesh( CubeGeom, CubeMat );
 cube.position.set(0, -20, 0);
 scene.add( cube );
 
-// objects declaration
 let turbo;
 let turbo1;
 let turbo2;
@@ -73,31 +63,12 @@ let fleche1;
 let fleche2;
 let originalcolors;
 let speed = 0.05;
+let deg;
+let rpmValue;
+
+const rpm = document.getElementById("rpm");
 
 const loader = new OBJLoader();
-
-//const axesHelper = new THREE.AxesHelper( 250 );
-//scene.add( axesHelper );
-
-// loader.load(
-//   // resource URL
-//   'turbo_2.obj',
-//   // called when resource is loaded
-//   function ( object ) {
-//     object.material = new THREE.MeshPhysicalMaterial( {
-//       color: 0xECF0F1,
-//       envMap: scene.background,
-//       envMapIntensity: 1.0,
-//       ior: 1.25,
-//       iridescence: 0,
-//       metalness: 0,
-//       roughness: 0.8,
-//       opacity: 1,
-//       thickness: 5.0,
-//       transmission: 0,
-//   } );
-//   console.log(object);
-// });  
 
 let textureLoader = new THREE.TextureLoader();
 // load a resource
@@ -271,12 +242,12 @@ window.addEventListener('pointermove', (event) => {
 const casingMessage = document.getElementById("casingMessage");
 const impellerMessage = document.getElementById("impellerMessage");
 
-window.addEventListener('mousedown', (event) => {
-  switch(event.button) {
-    case 0:
+
+window.addEventListener('pointerdown', (event) => {
       if(turbo!==undefined && turbo1!==undefined && turbo2!==undefined) {
         if(turbo1.material.color.getHex() === 0x00ff00) {
           if(turbo2.material.color.getHex() !== 0x00ff00 && turbo3.material.color.getHex() !== 0x00ff00) {
+            turbo1.material.color = new THREE.Color(0xEE0000);
             camera.position.set(-200, 50, -50);
             turbo2.material.color = new THREE.Color(0xECF0F1);
             turbo3.position.y = 10000;
@@ -302,10 +273,20 @@ window.addEventListener('mousedown', (event) => {
           casingMessage.style.visibility = "visible";
           impellerMessage.style.visibility = "hidden";
         }
+        objects = [turbo1, turbo2, turbo3];
+        raycaster.setFromCamera(pointerPosition, camera);
+        const intersects = raycaster.intersectObjects(objects);
+        if(intersects.length === 0)
+        {
+          console.log("no intersect");
+          camera.position.set(-200, 200, 0);
+          turbo1.material.color = new THREE.Color(0x424949);
+          turbo2.material.color = new THREE.Color(0xECF0F1);
+          turbo3.material.color = new THREE.Color(0xECF0F1);
+          casingMessage.style.visibility = "hidden";
+          impellerMessage.style.visibility = "hidden";
+        }
       }
-      break;
-  }
-
 });
 
 let objects = [turbo1, turbo2, turbo3, fleche1, fleche2];
@@ -313,9 +294,27 @@ let oldlength;
 let length;
 
 function animate() {
+  deg = speed*(180/Math.PI);
+  console.log(deg);
+  rpmValue = deg*10;
   if(camera.position.y <0)
   {
     camera.position.y = 0;
+  }
+  if (camera.position.y > 200) {
+    camera.position.y = 200;
+  }
+  if (camera.position.x > 400) {
+    camera.position.x = 400;
+  }
+  if (camera.position.x < -400) {
+    camera.position.x = -400;
+  }
+  if (camera.position.z > 400) {
+    camera.position.z = 400;
+  }
+  if (camera.position.z < -400) {
+    camera.position.z = -400;
   }
   objects = [turbo1, turbo2, turbo3, fleche1, fleche2];
   if(fleche1!==undefined && fleche2!==undefined && turbo1!==undefined && turbo2!==undefined && turbo3!==undefined) {
@@ -329,10 +328,10 @@ function animate() {
     if (length > 0 &&  intersects[0].object.name !== "fleche1" && intersects[0].object.name !== "fleche2") {
       if (intersects[0].object.material.color.getHex() !== 0xEE0000) {
         intersects[0].object.material.color = new THREE.Color(0x00ff00);
-      } 
+      }
     }
     else {
-      if(turbo1.material.color.getHex() !== 0x00ff00)
+      if(turbo1.material.color.getHex() !== 0xEE0000)
       {
         turbo1.material.color = new THREE.Color(0x424949);
       }
@@ -367,7 +366,7 @@ function animate() {
   }
   if(fleche2!==undefined) {
     if(fleche2.position.z<110){
-      fleche2.position.z += speed*5;
+      fleche2.position.z += speed*15;
     }
     else {
       fleche2.position.z = 50;
