@@ -9,8 +9,8 @@ canvas {
 
 #casingMessage{
     position: absolute;
-    top: 70%; /* Changer la valeur pour ajuster la position verticale */
-    left: 5%; /* Changer la valeur pour ajuster la position horizontale */
+    top: 70%;
+    left: 5%;
     color: rgb(50, 36, 36);
     font-family: Arial;
     font-size: 3rem;
@@ -23,8 +23,8 @@ canvas {
 
 #impellerMessage{
     position: absolute;
-    top: 60%; /* Changer la valeur pour ajuster la position verticale */
-    left: 10%; /* Changer la valeur pour ajuster la position horizontale */
+    top: 60%;
+    left: 10%;
     color: rgb(50, 36, 36);
     font-family: Arial;
     font-size: 3rem;
@@ -37,8 +37,22 @@ canvas {
 
 #controls{
     position: absolute;
-    top: 2%; /* Changer la valeur pour ajuster la position verticale */
-    right: 2%; /* Changer la valeur pour ajuster la position horizontale */
+    top: 2%;
+    right: 2%;
+    color: rgb(0, 0, 0);
+    font-family: Arial;
+    font-size: 1rem;
+    text-align: left;
+    z-index: 100;
+    visibility: visible;
+    background-color: white;
+    pointer-events: none;
+}
+
+#rpm{
+    position: absolute;
+    top: 2%;
+    left: 2%;
     color: rgb(0, 0, 0);
     font-family: Arial;
     font-size: 1rem;
