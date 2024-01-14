@@ -130,7 +130,6 @@ loader.load(
     object.name = "turbo";
     object.rotation.x = -Math.PI / 2;
 		scene.add( object );
-    console.log(object);
 	},
 	// called when loading is in progresses
 	function ( xhr ) {
@@ -176,7 +175,6 @@ loader.load(
     fleche2.name = "fleche2";
 		scene.add( fleche1 );
     scene.add( fleche2 );
-    console.log(object);
 	},
 	// called when loading is in progresses
 	function ( xhr ) {
@@ -278,7 +276,6 @@ window.addEventListener('pointerdown', (event) => {
         const intersects = raycaster.intersectObjects(objects);
         if(intersects.length === 0)
         {
-          console.log("no intersect");
           camera.position.set(-200, 200, 0);
           turbo1.material.color = new THREE.Color(0x424949);
           turbo2.material.color = new THREE.Color(0xECF0F1);
@@ -295,8 +292,8 @@ let length;
 
 function animate() {
   deg = speed*(180/Math.PI);
-  console.log(deg);
   rpmValue = deg*10;
+  rpm.innerText = "Current rpm: " + rpmValue.toFixed(0);
   if(camera.position.y <0)
   {
     camera.position.y = 0;
@@ -323,7 +320,6 @@ function animate() {
     length = intersects.length;
     if (length!==undefined && oldlength!==undefined && length!==oldlength && oldlength!==0){
       length=0;
-      console.log(length, oldlength);
     }
     if (length > 0 &&  intersects[0].object.name !== "fleche1" && intersects[0].object.name !== "fleche2") {
       if (intersects[0].object.material.color.getHex() !== 0xEE0000) {
@@ -348,7 +344,6 @@ function animate() {
   }
   
   if(turbo!==undefined && turbo1===undefined && turbo2===undefined) {
-    console.log(turbo);
     turbo1 = turbo.children[0];
     turbo2 = turbo.children[1];
     turbo3 = turbo.children[2];
